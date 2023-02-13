@@ -53,11 +53,60 @@ body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
+
+* {
+	box-sizing: border-box;
+}
+
 header {
+	display: flex;
+	flex-direction: column;
+}
+
+.header-modal {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+
+	background-color: #000000;
+	color: #FFFFFF;
+	padding: 10px 0;
+	margin-top: 0;
+	width: 100;
+	margin-left: -600px;
+	margin-right: -600px;
+}
+
+.edition-modal {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+}
+
+.header-modal button {
+	border:none;
+    background-image:none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+	background-color: #FFFFFF;
+	font: inherit;
+	padding: 10px 20px;
+	border-radius: 60px;
+
+	cursor: pointer;
+
+}
+
+.header-base {
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0
+
 }
+
 section {
 	margin: 50px 0
 }
@@ -189,6 +238,14 @@ footer nav ul {
 	margin: 2em
 }
 
+/* Ajout du main au centre */
+
+main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 /* Ajout des boutons filtre du portfolio */
 
 #portfolio nav {
@@ -243,3 +300,93 @@ margin-top: 50px;
 #forgotten {
 	text-decoration: underline;
 }
+
+
+/* Ajout de la modale */
+
+#modal {
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	padding: 100px;
+
+}
+
+.modal-wrapper {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 50px 100px;
+	gap: 50px;
+
+	background-color: #FFFFFF;
+	border-radius: 10px;
+	border: solid 1px black;
+
+	width: 600px;
+	height: 670px;
+}
+
+#cross {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+
+	cursor: pointer;
+}
+
+#modal h3 {
+	font-size: 26px;
+}
+
+.modal-img {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.modal-img figure {
+	height: 100px;
+}
+
+.modal-bottom {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 25px;
+}
+
+.modal-bottom input {
+	border:none;
+    background-image:none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 17px;
+	color: #FFFFFF;
+	background-color: #1D6154;
+	padding: 10px 50px;
+	border-radius: 60px;
+
+	margin-top: 20px;
+
+	cursor: pointer;
+}
+
+.modal-bottom p {
+	color: #D65353;
+	cursor: pointer;
+}
+
+
+
