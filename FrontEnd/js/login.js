@@ -24,11 +24,10 @@ userLogin.addEventListener("submit", async e => {
   let result = await response.json()
 
   if (result.userId) {
+    sessionStorage.setItem("token", result.token)
     location = "index.html"
-    const token = result.token
   } else {
     alert("Erreur dans l’identifiant ou le mot de passe.")
   }
 
 })
-

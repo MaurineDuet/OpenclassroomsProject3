@@ -7,8 +7,7 @@ const modalHeader = document.querySelector('.header-modal')
 modalButton.addEventListener('click', e => {
     modalBox.style.display = null
     modalBox.setAttribute('aria-hidden', false)
-    modalBox.setAttribute('aria-modal', true)
-    document.body.style.overflow = 'hidden'
+    modalBox.setAttribute('aria-modal', true) 
 } )
 
 /* Fermer la modale */
@@ -19,5 +18,4 @@ closeIcon.addEventListener('click' , e => {
     modalBox.style.display = "none"
     modalBox.setAttribute('aria-hidden', true)
     modalBox.setAttribute('aria-modal', false)
-    document.body.style.overflow = 'scroll'
 })
