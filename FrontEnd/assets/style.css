@@ -222,12 +222,12 @@ li:hover {
 }
 #contact form, #login form, .modal-wrapper-page-2 form {
 	text-align: left;
-	margin-top:30px;
+	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input, #login input, .modal-wrapper-page-2 input {
+#contact input, #login input, .modal-wrapper-page-2 input, .modal-wrapper-page-2 select {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
@@ -241,7 +241,7 @@ li:hover {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#contact input[type="submit"], #login input[type="submit"]{
+#contact input[type="submit"], #login input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -314,9 +314,8 @@ margin-top: 50px;
 
 /* Ajout de la modale */
 
-.show {
-	display: flex;
-}
+/* Global */
+
 
 #modal {
 	position: fixed;
@@ -326,7 +325,7 @@ margin-top: 50px;
 	height: 100%;
 	width: 100%;
 	background: rgba(0, 0, 0, 0.5);
-	padding: 100px;
+	padding: 85px;
 
 }
 
@@ -340,12 +339,16 @@ margin-top: 50px;
 	border-radius: 10px;
 
 	width: 620px;
-	height: 700px;
+	height: 710px;
 }
 
+/* Page 1 de la modale */
+
+/* Haut de la modale */
+
 .modal-wrapper-page-1 {
-	padding: 50px 100px;
-	gap: 50px;
+	padding: 50px 90px;
+	gap: 35px;
 }
 
 .cross {
@@ -360,17 +363,47 @@ margin-top: 50px;
 	font-size: 26px;
 }
 
+/* Travaux sur la modale */
+
 .modal-img {
 	display: flex;
 	justify-content: start;
 	flex-wrap: wrap;
 	row-gap: 25px;
-	column-gap: 8px;
+	column-gap: 10px;
+
+	position: relative;
 }
 
-.modal-img figure {
-	height: 100px;
+.modal-img p {
+	cursor: pointer;
 }
+
+.modal-minia {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.modal-miniature-img {
+	height: 105px;
+	width: 80px;
+	object-fit: contain;
+	padding-bottom: 5px;
+}
+
+.modal-bin {
+	position: absolute;
+	margin-top: 5px;
+	margin-right: 8px;
+	padding: 5px;
+	height: 25px;
+	background-color: #000000;
+	border-radius: 2px;
+
+	cursor: pointer;
+}
+
+/* Bas de la modale */
 
 .modal-bottom {
 	display: flex;
@@ -395,7 +428,7 @@ margin-top: 50px;
 	padding: 10px 50px;
 	border-radius: 60px;
 
-	margin-top: 20px;
+	margin-top: 15px;
 
 	cursor: pointer;
 }
@@ -406,6 +439,12 @@ margin-top: 50px;
 }
 
 /* Modale page 2 */
+
+
+select {
+	font: inherit;
+	background-color: #FFFFFF;
+}
 
 .modal-wrapper-page-2 {
 	padding: 30px 0px;
@@ -441,17 +480,26 @@ margin-top: 50px;
 	padding-bottom: 15px;
 }
 
-.modal-wrapper-page-2-add-pic button {
-	border: none;
-    padding: 15px 40px;
-	border-radius: 50px;
-	white-space: nowrap;
-	
-    background-color: #CBD6DC;
-	font-family: 'Work Sans';
-	color: #306685;
+.modal-wrapper-page-2-add-pic input[type="file"] {
+	display: none;
+}
 
-	cursor: pointer;
+.modal-wrapper-page-2 label {
+	margin: 2em 0 1em 0;
+}
+
+.modal-wrapper-page-2-add-pic label {
+border: none;
+padding: 15px 40px;
+border-radius: 50px;
+white-space: nowrap;
+
+background-color: #CBD6DC;
+font-family: 'Work Sans';
+color: #306685;
+
+cursor: pointer;
+margin: 0;
 }
 
 .modal-wrapper-page-2-add-pic p {
@@ -468,9 +516,6 @@ margin-top: 50px;
 
 }
 
-.modal-wrapper-page-2 label {
-	margin: 2em 0 1em 0;
-}
 
 #validate-button {
 	margin-top: 5px;

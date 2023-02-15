@@ -64,39 +64,6 @@
 
 
 					<div class="modal-img">
-						<figure>
-							<img src="assets/icons/pic.jpg" alt="">
-						</figure>
-						<figure>
-							<img src="assets/icons/pic.jpg" alt="">
-						</figure>
-						<figure>
-							<img src="assets/icons/pic.jpg" alt="">
-						</figure>
-						<figure>
-							<img src="assets/icons/pic.jpg" alt="">
-						</figure>
-						<figure>
-							<img src="assets/icons/pic.jpg" alt="">
-						</figure>
-						<figure>
-							<img src="assets/icons/pic.jpg" alt="">
-						</figure>
-						<figure>
-							<img src="assets/icons/pic.jpg" alt="">
-						</figure>
-						<figure>
-							<img src="assets/icons/pic.jpg" alt="">
-						</figure>
-						<figure>
-							<img src="assets/icons/pic.jpg" alt="">
-						</figure>
-						<figure>
-							<img src="assets/icons/pic.jpg" alt="">
-						</figure>
-						<figure>
-							<img src="assets/icons/pic.jpg" alt="">
-						</figure>
 					</div>
 
 					<div class="modal-bottom">
@@ -118,15 +85,23 @@
 					<form>
 						<div class="modal-wrapper-page-2-add-pic">
 							<img src="assets/icons/add-pic.svg" alt="" id="add-pic">
-							<button>+ Ajouter photo</button>
+							<label for="chosePicture">
+								+ Ajouter photo
+								<input id="chosePicture" type="file" accept="image/png, image/jpeg">
+							</label>
 							<p>jpg, png : 4mo max</p>
 						</div>
 
 						<div class="modal-wrapper-page-2-details">
 							<label for="title">Titre</label>
 							<input type="text" name="title" id="title">
+
 							<label for="category">Catégorie</label>
-							<input type="text" name="category" id="category">
+							<select name="category" id="category">
+								<option value="object">Objets</option>
+								<option value="apartment">Appartements</option>
+								<option value="hotel">Hôtels & Restaurants</option>
+							</select>
 						</div>
 
 					</form>
