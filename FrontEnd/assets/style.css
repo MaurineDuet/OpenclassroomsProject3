@@ -311,6 +311,10 @@ margin-top: 50px;
 	text-decoration: underline;
 }
 
+.active {
+	font-weight: 700;
+}
+
 
 /* Ajout de la modale */
 
@@ -347,7 +351,7 @@ margin-top: 50px;
 /* Haut de la modale */
 
 .modal-wrapper-page-1 {
-	padding: 50px 90px;
+	padding: 40px 90px;
 	gap: 35px;
 }
 
@@ -373,6 +377,7 @@ margin-top: 50px;
 	column-gap: 10px;
 
 	position: relative;
+	padding-bottom: 15px;
 }
 
 .modal-img p {
@@ -440,9 +445,7 @@ margin-top: 50px;
 
 /* Modale page 2 */
 
-
 select {
-	font: inherit;
 	background-color: #FFFFFF;
 }
 
@@ -473,6 +476,7 @@ select {
 	background-color: #E8F1F6;
 	padding: 30px 120px;
 	border-radius: 3px;
+	width: 427px;
 }
 
 .modal-wrapper-page-2-add-pic img {
@@ -516,7 +520,6 @@ margin: 0;
 
 }
 
-
 #validate-button {
 	margin-top: 5px;
 	font-family: 'Syne';
@@ -532,3 +535,19 @@ margin: 0;
 
 	height: 40PX;
 }
+
+#img-preview {
+	display: flex;
+	align-items: center; 
+	justify-content: center;
+	height: 205px;
+}
+
+#img-preview img { 
+	height: 100%;
+	width: auto;
+	object-fit: contain; 
+	align-self: center; 
+	padding-bottom: 0;
+  }
+  

@@ -25,6 +25,7 @@ userLogin.addEventListener("submit", async e => {
 
   if (result.userId) {
     sessionStorage.setItem("token", result.token)
+    sessionStorage.setItem("userId", result.userId)
     location = "index.html"
   } else {
     alert("Erreur dans l’identifiant ou le mot de passe.")
