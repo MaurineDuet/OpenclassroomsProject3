@@ -235,7 +235,12 @@ addWork.addEventListener("submit", async e => {
 
     console.log(response)
     let result = await response.json()
-    console.log(result)
+    if (response.status === 201) {
+        alert('Le formulaire a bien été envoyé !')
+    } else {
+        alert("Le formulaire n'est pas correctement rempli. Veuillez réessayer.")
+    }
+
     resetForm()
 
     let work = new Work(result)
