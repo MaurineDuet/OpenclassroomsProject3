@@ -17,7 +17,7 @@ const openModal = function (e) {
     modalSecondPage.classList.add("hidden")
     target.setAttribute('aria-hidden', false)
     target.setAttribute('aria-modal', true)
-    
+
     modal = target
     modal.addEventListener("click", closeModal)
 
@@ -46,7 +46,6 @@ const closeModal = function (e) {
 
 modalButton.addEventListener('click', openModal)
 
-
 /* Fermer la modale sur la croix */
 
 const closeIcons = document.querySelectorAll('.cross')
@@ -62,7 +61,6 @@ closeIcons.forEach(closeIcon => {
 
 })
 
-
 /* IMPORT DES ELEMENTS DE LA GALERIE DE LA MODALE DEPUIS L'API */
 
 class Work {
@@ -70,8 +68,40 @@ class Work {
         this.id = jsonWork.id
         this.title = jsonWork.title
         this.img = jsonWork.imageUrl
-        this.category = jsonWork.category.id
+        if (jsonWork.category && jsonWork.category.id) {
+            this.category = jsonWork.category.id
+        } else {
+            this.category = jsonWork.categoryId
+        }
     }
+}
+
+export function createWork(work, areWeInModal = true) {
+    const newWork = document.createElement("figure")
+    if (areWeInModal) {
+        newWork.setAttribute("data-piece-of-work", "")
+        newWork.setAttribute("data-piece-of-work-id", work.id)
+        newWork.setAttribute("data-miniature", "")
+        newWork.innerHTML +=
+            `
+            <div class="modal-minia">
+                <img src="assets/icons/bin.svg" class="modal-bin" data-bin data-bin-id="${work.id}">
+                <img src="${work.img}" class="modal-miniature-img">
+            </div>
+            <p>éditer</p>
+        `
+    } else {
+        newWork.setAttribute("data-figure", "")
+        newWork.setAttribute("data-figure-id", work.id)
+        newWork.setAttribute("data-figure-cat", work.category)
+        newWork.innerHTML +=
+            `
+            <img src="${work.img}" alt="${work.id}">
+            <figcaption>${work.title}</figcaption>
+        `
+    }
+
+    return newWork
 }
 
 await fetch("http://localhost:5678/api/works")
@@ -80,14 +110,14 @@ await fetch("http://localhost:5678/api/works")
 
         for (let jsonWork of jsonListWorks) {
             let work = new Work(jsonWork)
-            document.querySelector(".modal-img").innerHTML +=
-                `<figure data-miniature data-piece-of-work data-piece-of-work-id="${work.id}">
-                <div class="modal-minia">
-                    <img src="assets/icons/bin.svg" class="modal-bin" data-bin data-bin-id="${work.id}">
-                    <img src="${work.img}" class="modal-miniature-img">
-                </div>
-                <p>éditer</p>
-            </figure>`
+            document.querySelector(".modal-img").append(createWork(work, true))
+            /*`<figure data-miniature data-piece-of-work data-piece-of-work-id="${work.id}">
+            <div class="modal-minia">
+                <img src="assets/icons/bin.svg" class="modal-bin" data-bin data-bin-id="${work.id}">
+                <img src="${work.img}" class="modal-miniature-img">
+            </div>
+            <p>éditer</p>
+        </figure>`*/
         }
     })
 
@@ -123,21 +153,36 @@ const bins = document.querySelectorAll("[data-bin]")
 if (bins) {
 
     bins.forEach(bin => {
-        bin.addEventListener('click', e => {
+        bin.addEventListener('click', async e => {
+            e.preventDefault()
             const binId = bin.getAttribute("data-bin-id")
 
-            pieceOfWorks.forEach(pieceOfWork  => {
-            const pieceOfWorkId = pieceOfWork.getAttribute("data-piece-of-work-id")
-            if (binId === pieceOfWorkId) {
-                pieceOfWork.classList.add("hidden")
-            }
-        
-        })
+            for (const pieceOfWork of pieceOfWorks) {
+                const pieceOfWorkId = pieceOfWork.getAttribute("data-piece-of-work-id")
+                if (binId === pieceOfWorkId) {
+                    const response = await fetch(`http://localhost:5678/api/works/${pieceOfWorkId}`, {
+                        method: "DELETE",
+                        headers: new Headers({
+                            'Authorization': 'Basic ' + sessionStorage.getItem("token"),
+                        }),
 
+                    })
+                    console.log(response)
+                    if (response.status === 204) {
+                        alert('Work Deleted Successfully')
+                        pieceOfWork.remove()
+                        document.querySelector(`[data-figure-id="${pieceOfWorkId}"]`).remove()
+                    }
+
+                }
+
+            }
+
+        })
     })
-})
 
 }
+
 
 /* AJOUT DE TRAVAUX */
 
@@ -150,58 +195,55 @@ const addPicModal = document.querySelector(".modal-wrapper-page-2-add-pic")
 const changePicture = document.querySelector(".modal-wrapper-page-2-add-pic label")
 const fileDetails = document.querySelector(".modal-wrapper-page-2-add-pic p")
 
-function getImgData () {
+function getImgData() {
     const files = chooseFile.files[0]
-    if(files) {
+    if (files) {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(files);
         fileReader.addEventListener("load", function () {
-        addPicModal.style.padding = "0 120px"
-          imgIcon.classList.add('hidden')
-          imgPreview.classList.remove('hidden');
-          imgPreview.innerHTML = '<img src="' + this.result + '" />'
-          changePicture.classList.add('hidden')
-          fileDetails.classList.add('hidden')
+            addPicModal.style.padding = "0 120px"
+            imgIcon.classList.add('hidden')
+            imgPreview.classList.remove('hidden');
+            imgPreview.innerHTML = '<img src="' + this.result + '" />'
+            changePicture.classList.add('hidden')
+            fileDetails.classList.add('hidden')
         })
     }
 }
 
 chooseFile.addEventListener("change", e => {
     getImgData()
-} )
+})
 
-/* Charger la miniature */
+/* Ajouter un work */
 
 const addWork = document.querySelector(".modal-wrapper-page-2 form")
 
 addWork.addEventListener("submit", async e => {
-  e.preventDefault()
+    e.preventDefault()
 
-  const workData = new FormData(addWork)
-  const image = workData.get("image")
-  const imageUrl = URL.createObjectURL(image)
+    const workData = new FormData(addWork)
+    console.log(workData)
 
-  const workInfos = {
-    /*id: Date.now(),*/
-    title: workData.get("title"),
-    imageUrl,
-    categoryId: workData.get("category"),
-    /*userId: sessionStorage.getItem("userId")*/
-  }
+    let response = await fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: new Headers({
+            'Authorization': 'Basic ' + sessionStorage.getItem("token"),
+        }),
+        body: workData
+    })
 
-  console.log(workInfos)
+    console.log(response)
+    let result = await response.json()
+    console.log(result)
+    resetForm()
 
-  const chargeUtile = JSON.stringify(workInfos)
+    let work = new Work(result)
+    document.querySelector(".gallery").append(createWork(work, false))
+    document.querySelector(".modal-img").append(createWork(work, true))
 
-  let response = await fetch("http://localhost:5678/api/works", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "accept": "application/json"},
-    body: chargeUtile
-  })
-
-  let result = await response.json()
-  resetForm()
 })
+
 
 
 
@@ -271,7 +313,31 @@ modalButton.addEventListener("click", e => {
 
 }
 
-}) */
+})
+
+------------- Ajouter un work depuis le formulaire
+
+    /*const reader = new FileReader()
+    reader.readAsDataURL(chooseFile.files[0])
+
+    reader.addEventListener("load", async e => {
+
+        
+        const workInfos = {
+            title: workData.get("title"),
+            image:reader.result,
+            category: workData.get("category"),
+        }
+    
+        /* const chargeUtile = JSON.stringify(workInfos) 
+    
+        workData.append('image', reader.result)
 
 
- 
+*/
+
+
+
+/*body: JSON.stringify({
+    userId: sessionStorage.getItem("userId")
+})*/

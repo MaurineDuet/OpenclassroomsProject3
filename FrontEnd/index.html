@@ -88,18 +88,17 @@
 							<div id="img-preview" class="hidden"></div>
 							<label for="chosePicture">
 								+ Ajouter photo
-								<input name="image" id="chosePicture" type="file" accept="image/png, image/jpeg" src="">
+								<input name="image" id="chosePicture" type="file" accept="image/png, image/jpeg" src="" required>
 							</label>
 							<p>jpg, png : 4mo max</p>
 						</div>
 
 						<div class="modal-wrapper-page-2-details">
 							<label for="title">Titre</label>
-							<input type="text" name="title" id="title">
+							<input type="text" name="title" id="title" required>
 
 							<label for="category">Catégorie</label>
-							<select name="category" id="category">
-								<option value="">Choisissez votre catégorie</option>
+							<select name="category" id="category" required>
 								<option value="1">Objets</option>
 								<option value="2">Appartements</option>
 								<option value="3">Hôtels & Restaurants</option>
