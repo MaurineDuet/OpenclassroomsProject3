@@ -1,4 +1,8 @@
+/* ----------- CODE LIE A LA MODALE DANS LE MODE ADMINISTRATEUR ----------- */
+
 /* OUVERTURE ET FERMETURE DE LA MODALE */
+
+/* Selection des différents éléments dans le HTML */
 
 let modal = null
 
@@ -6,9 +10,13 @@ const modalButton = document.querySelector('#modal-button')
 const modalBox = document.querySelector('#modal')
 const modalHeader = document.querySelector('.header-modal')
 
+/* Stop la propagation d'un événement à l'élement parent (utilisé pour le click qui ferme la modale) */
+
 const stopPropagation = function (e) {
     e.stopPropagation()
 }
+
+/* Fonction permettant l'ouverture de la modale */
 
 const openModal = function (e) {
     const target = document.querySelector('#modal')
@@ -21,9 +29,11 @@ const openModal = function (e) {
     modal = target
     modal.addEventListener("click", closeModal)
 
-    const stopCloseModal = modal.querySelector("[modal-close]")
+    const stopCloseModal = modal.querySelector("[data-modal-close]")
     stopCloseModal.addEventListener('click', stopPropagation)
 }
+
+/* Fonction permettant de reset le formulaire */
 
 function resetForm() {
     document.querySelector(".modal-wrapper-page-2 form").reset()
@@ -35,6 +45,8 @@ function resetForm() {
     addPicModal.style.padding = "30px 120px"
 }
 
+/* Fonction permettant la fermeture de la modale */
+
 const closeModal = function (e) {
     if (modal === null) return
     modal.classList.add('hidden')
@@ -44,9 +56,11 @@ const closeModal = function (e) {
     modal = null
 }
 
+/* Ecoute du click sur le bouton permettant l'ouverture de la modale */
+
 modalButton.addEventListener('click', openModal)
 
-/* Fermer la modale sur la croix */
+/* Fermeture de la modale en appuyant sur la croix */
 
 const closeIcons = document.querySelectorAll('.cross')
 
@@ -61,7 +75,36 @@ closeIcons.forEach(closeIcon => {
 
 })
 
-/* IMPORT DES ELEMENTS DE LA GALERIE DE LA MODALE DEPUIS L'API */
+
+/* NAVIGATION ENTRE LES DEUX PAGES DE LA MODALE */
+
+/* Passer à la seconde page de la modale */
+
+const addPicButton = document.querySelector('.add-pic-button')
+const modalFirstPage = document.querySelector('.modal-wrapper-page-1')
+const modalSecondPage = document.querySelector('.modal-wrapper-page-2')
+
+addPicButton.addEventListener("click", e => {
+    modalFirstPage.classList.add("hidden")
+    modalSecondPage.classList.remove("hidden")
+})
+
+/* Revenir à la première page de la modale */
+
+const backToFirstPage = document.querySelector('.arrow')
+
+backToFirstPage.addEventListener("click", e => {
+    modalFirstPage.classList.remove("hidden")
+    modalSecondPage.classList.add("hidden")
+    resetForm()
+})
+
+
+/* AJOUT ET SUPRESSION DE TRAVAUX */
+
+/* IMPORT DES DIFFERENTS TRAVAUX DANS LE MODE ADMINISTRATEUR VIA L'UTILISATION D'UNE FONCTION */
+
+/* Création d'une classe Work qui désigne chaque projet */
 
 class Work {
     constructor(jsonWork) {
@@ -75,6 +118,8 @@ class Work {
         }
     }
 }
+
+/* Fonction permettant l'import d'un projet qui apparaitra soit dans la modale et dans la galerie */
 
 export function createWork(work, areWeInModal = true) {
     const newWork = document.createElement("figure")
@@ -104,6 +149,8 @@ export function createWork(work, areWeInModal = true) {
     return newWork
 }
 
+/* Import d'un projet sous forme de miniature dans la modale */
+
 await fetch("http://localhost:5678/api/works")
     .then(data => data.json())
     .then(jsonListWorks => {
@@ -111,39 +158,76 @@ await fetch("http://localhost:5678/api/works")
         for (let jsonWork of jsonListWorks) {
             let work = new Work(jsonWork)
             document.querySelector(".modal-img").append(createWork(work, true))
-            /*`<figure data-miniature data-piece-of-work data-piece-of-work-id="${work.id}">
-            <div class="modal-minia">
-                <img src="assets/icons/bin.svg" class="modal-bin" data-bin data-bin-id="${work.id}">
-                <img src="${work.img}" class="modal-miniature-img">
-            </div>
-            <p>éditer</p>
-        </figure>`*/
         }
     })
 
 
-/* NAVIGATION ENTRE LES DEUX PAGES DE LA MODALE */
+/* AJOUT DE NOUVEAUX TRAVAUX VIA LE FORMULAIRE */
 
-/* Passer à la seconde page de la modale */
+/* Charger la miniature de l'image dans le formulaire */
 
-const addPicButton = document.querySelector('.add-pic-button')
-const modalFirstPage = document.querySelector('.modal-wrapper-page-1')
-const modalSecondPage = document.querySelector('.modal-wrapper-page-2')
+const chooseFile = document.getElementById("chosePicture")
+const imgPreview = document.getElementById("img-preview")
+const imgIcon = document.getElementById("add-pic")
+const addPicModal = document.querySelector(".modal-wrapper-page-2-add-pic")
+const changePicture = document.querySelector(".modal-wrapper-page-2-add-pic label")
+const fileDetails = document.querySelector(".modal-wrapper-page-2-add-pic p")
 
-addPicButton.addEventListener("click", e => {
-    modalFirstPage.classList.add("hidden")
-    modalSecondPage.classList.remove("hidden")
+function getImgData() {
+    const files = chooseFile.files[0]
+    if (files) {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(files);
+        fileReader.addEventListener("load", function () {
+            addPicModal.style.padding = "0 120px"
+            imgIcon.classList.add('hidden')
+            imgPreview.classList.remove('hidden');
+            imgPreview.innerHTML = '<img src="' + this.result + '" />'
+            changePicture.classList.add('hidden')
+            fileDetails.classList.add('hidden')
+        })
+    }
+}
+
+chooseFile.addEventListener("change", e => {
+    getImgData()
 })
 
-/* Revenir à la première page de la modale */
+/* Ajout d'un nouveau projet via la soumission du formulaire */
 
-const backToFirstPage = document.querySelector('.arrow')
+const addWork = document.querySelector(".modal-wrapper-page-2 form")
 
-backToFirstPage.addEventListener("click", e => {
-    modalFirstPage.classList.remove("hidden")
-    modalSecondPage.classList.add("hidden")
+addWork.addEventListener("submit", async e => {
+    e.preventDefault()
+
+    const workData = new FormData(addWork)
+    console.log(workData)
+
+    let response = await fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: new Headers({
+            'Authorization': 'Basic ' + sessionStorage.getItem("token"),
+        }),
+        body: workData
+    })
+
+    console.log(response)
+    let result = await response.json()
+    if (response.status === 201) {
+        alert('Le formulaire a bien été envoyé !')
+    } else {
+        alert("Le formulaire n'est pas correctement rempli. Veuillez réessayer.")
+    }
+
     resetForm()
+    closeModal()
+
+    let work = new Work(result)
+    document.querySelector(".gallery").append(createWork(work, false))
+    document.querySelector(".modal-img").append(createWork(work, true))
+
 })
+
 
 /* SUPPRESSION DE TRAVAUX DEPUIS LA MODALE */
 
@@ -182,74 +266,6 @@ if (bins) {
     })
 
 }
-
-
-/* AJOUT DE TRAVAUX */
-
-/* Charger la miniature */
-
-const chooseFile = document.getElementById("chosePicture")
-const imgPreview = document.getElementById("img-preview")
-const imgIcon = document.getElementById("add-pic")
-const addPicModal = document.querySelector(".modal-wrapper-page-2-add-pic")
-const changePicture = document.querySelector(".modal-wrapper-page-2-add-pic label")
-const fileDetails = document.querySelector(".modal-wrapper-page-2-add-pic p")
-
-function getImgData() {
-    const files = chooseFile.files[0]
-    if (files) {
-        const fileReader = new FileReader();
-        fileReader.readAsDataURL(files);
-        fileReader.addEventListener("load", function () {
-            addPicModal.style.padding = "0 120px"
-            imgIcon.classList.add('hidden')
-            imgPreview.classList.remove('hidden');
-            imgPreview.innerHTML = '<img src="' + this.result + '" />'
-            changePicture.classList.add('hidden')
-            fileDetails.classList.add('hidden')
-        })
-    }
-}
-
-chooseFile.addEventListener("change", e => {
-    getImgData()
-})
-
-/* Ajouter un work */
-
-const addWork = document.querySelector(".modal-wrapper-page-2 form")
-
-addWork.addEventListener("submit", async e => {
-    e.preventDefault()
-
-    const workData = new FormData(addWork)
-    console.log(workData)
-
-    let response = await fetch("http://localhost:5678/api/works", {
-        method: "POST",
-        headers: new Headers({
-            'Authorization': 'Basic ' + sessionStorage.getItem("token"),
-        }),
-        body: workData
-    })
-
-    console.log(response)
-    let result = await response.json()
-    if (response.status === 201) {
-        alert('Le formulaire a bien été envoyé !')
-    } else {
-        alert("Le formulaire n'est pas correctement rempli. Veuillez réessayer.")
-    }
-
-    resetForm()
-
-    let work = new Work(result)
-    document.querySelector(".gallery").append(createWork(work, false))
-    document.querySelector(".modal-img").append(createWork(work, true))
-
-})
-
-
 
 
 
@@ -322,7 +338,7 @@ modalButton.addEventListener("click", e => {
 
 ------------- Ajouter un work depuis le formulaire
 
-    /*const reader = new FileReader()
+    const reader = new FileReader()
     reader.readAsDataURL(chooseFile.files[0])
 
     reader.addEventListener("load", async e => {
@@ -339,10 +355,17 @@ modalButton.addEventListener("click", e => {
         workData.append('image', reader.result)
 
 
+------------- Nouveau travail sous forme de miniature dans la modale
+
+            `<figure data-miniature data-piece-of-work data-piece-of-work-id="${work.id}">
+            <div class="modal-minia">
+                <img src="assets/icons/bin.svg" class="modal-bin" data-bin data-bin-id="${work.id}">
+                <img src="${work.img}" class="modal-miniature-img">
+            </div>
+            <p>éditer</p>
+        </figure>`
+
 */
 
 
 
-/*body: JSON.stringify({
-    userId: sessionStorage.getItem("userId")
-})*/

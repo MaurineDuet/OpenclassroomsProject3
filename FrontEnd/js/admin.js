@@ -1,3 +1,4 @@
+/* Ajout du mode administrateur après le login */
 
 const adminBar = document.querySelector('.header-modal')
 const log = document.querySelector('#log')

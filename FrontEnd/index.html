@@ -11,11 +11,13 @@
 		rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="./js/main.js" type="module" defer></script>
+	<script src="./js/main.js" type="module"></script>
 </head>
 
 <body>
+
 	<header>
+
 		<div class="header-modal hidden">
 			<div class="edition-modal">
 				<img src="assets/icons/pen.svg" alt="">
@@ -35,13 +37,17 @@
 				</ul>
 			</nav>
 		</div>
+
 	</header>
 
 	<main>
+
 		<section id="introduction">
+
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="">
 			</figure>
+
 			<article>
 				<h2>Designer d'espace</h2>
 				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison
@@ -52,11 +58,12 @@
 				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
 					décorateur(trice)</p>
 			</article>
+
 		</section>
 
-		<section id="modal" class="hidden" aria-hidden="true" role="dialog" aria-labelledby="titlemodal">
+		<section id="modal" class="hidden" aria-hidden="true" role="dialog">
 
-			<aside class="modal-wrapper" modal-wrapper modal-close>
+			<aside class="modal-wrapper" data-modal-close>
 
 				<div class="modal-wrapper-page-1">
 					<img src="assets/icons/cross.svg" alt="" class="cross">
@@ -67,7 +74,7 @@
 					</div>
 
 					<div class="modal-bottom">
-						<img src="assets/icons/Line 1.png" alt="">
+						<img src="assets/icons/line.png" alt="">
 						<input type="button" value="Ajouter une photo" class="add-pic-button">
 						<p>Supprimer la galerie</p>
 					</div>
@@ -88,7 +95,7 @@
 							<div id="img-preview" class="hidden"></div>
 							<label for="chosePicture">
 								+ Ajouter photo
-								<input name="image" id="chosePicture" type="file" accept="image/png, image/jpeg" src="" required>
+								<input required name="image" id="chosePicture" type="file" accept="image/png, image/jpeg">
 							</label>
 							<p>jpg, png : 4mo max</p>
 						</div>
@@ -99,6 +106,7 @@
 
 							<label for="category">Catégorie</label>
 							<select name="category" id="category" required>
+								<option value="">Choisissez une catégorie</option>
 								<option value="1">Objets</option>
 								<option value="2">Appartements</option>
 								<option value="3">Hôtels & Restaurants</option>
@@ -106,7 +114,7 @@
 						</div>
 
 						<div class="modal-bottom">
-							<img src="assets/icons/Line 1.png" alt="">
+							<img src="assets/icons/line.png" alt="">
 							<input type="submit" value="Valider" id="validate-button">
 						</div>
 
@@ -120,7 +128,9 @@
 		</section>
 
 		<section id="portfolio">
+
 			<h2>Mes Projets</h2>
+
 			<nav>
 				<ul>
 					<li data-cat data-cat-type="all">Tous</li>
@@ -129,58 +139,18 @@
 					<li data-cat data-cat-type="3">Hôtels & restaurants</li>
 				</ul>
 			</nav>
+
 			<div class="gallery">
-				<!--
-			<figure>
-				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-				<figcaption>Abajour Tahina</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-				<figcaption>Appartement Paris V</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
-				<figcaption>Restaurant Sushisen - Londres</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
-				<figcaption>Villa “La Balisiere” - Port Louis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
-				<figcaption>Structures Thermopolis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-				<figcaption>Appartement Paris X</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
-				<figcaption>Pavillon “Le coteau” - Cassis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-				<figcaption>Villa Ferneze - Isola d’Elba</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
-				<figcaption>Appartement Paris XVIII</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-				<figcaption>Bar “Lullaby” - Paris</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-				<figcaption>Hotel First Arte - New Delhi</figcaption>
-			</figure>
-			-->
 			</div>
+
 		</section>
+
 		<section id="contact">
+
 			<h2>Contact</h2>
+
 			<p>Vous avez un projet ? Discutons-en !</p>
+
 			<form action="#" method="post">
 				<label for="name">Nom</label>
 				<input type="text" name="name" id="name">
@@ -190,16 +160,21 @@
 				<textarea name="message" id="message" cols="30" rows="10"></textarea>
 				<input type="submit" value="Envoyer">
 			</form>
+
 		</section>
+
 	</main>
 
 	<footer>
+
 		<nav>
 			<ul>
 				<li>Mentions Légales</li>
 			</ul>
 		</nav>
+
 	</footer>
+
 </body>
 
 </html>

@@ -3,19 +3,87 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -23,34 +91,59 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
-ol, ul {
+
+ol,
+ul {
 	list-style: none;
 }
-blockquote, q {
+
+blockquote,
+q {
 	quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
 	content: '';
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
 /** end reset css**/
 
+/* DEFINITION DU STYLE DE BASE */
+
+/* Body et main */
+
 body {
-	margin:auto;
-	font-family: 'Work Sans' ;
+	margin: auto;
+	font-family: 'Work Sans';
 	font-size: 14px;
 	display: flex;
 	flex-direction: column;
@@ -62,8 +155,6 @@ body {
 	box-sizing: border-box;
 }
 
-/* Ajout du main au centre */
-
 main {
 	max-width: 1140px;
 	display: flex;
@@ -72,6 +163,8 @@ main {
 	align-self: center;
 }
 
+/* HEADER */
+
 header {
 	display: flex;
 	flex-direction: column;
@@ -79,9 +172,13 @@ header {
 	width: 100%;
 }
 
+/* Ajout d'une classe permettant de cacher certains éléments */
+
 .hidden {
-	display: none!important;
+	display: none !important;
 }
+
+/* Header lié à la modale */
 
 .header-modal {
 	display: flex;
@@ -105,11 +202,11 @@ header {
 }
 
 .header-modal button {
-	border:none;
-    background-image:none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
+	border: none;
+	background-image: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
 
 	background-color: #FFFFFF;
 	font: inherit;
@@ -120,6 +217,8 @@ header {
 
 }
 
+/* Header de base */
+
 .header-base {
 	display: flex;
 	justify-content: space-between;
@@ -127,11 +226,17 @@ header {
 	padding: 50px 0;
 }
 
+/* AUTRES DETAILS GENERAUX */
+
+/* Sections */
+
 section {
 	margin: 50px 0
 }
 
-h1{
+/* Titres */
+
+h1 {
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -140,25 +245,29 @@ h1{
 	color: #B1663C
 }
 
-h1 > span {
+h1>span {
 	font-family: 'Work Sans';
-	font-size:10px;
+	font-size: 10px;
 	letter-spacing: 0.1em;
-;
+	;
 }
 
-h2{
+h2 {
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
 	color: #1D6154
 }
+
+/* Menus */
+
 nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
 
 }
+
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
@@ -168,13 +277,18 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
+/* INTRODUCTION */
+
 #introduction {
 	display: flex;
 	align-items: center;
 }
+
 #introduction figure {
 	flex: 1
 }
+
 #introduction img {
 	display: block;
 	margin: auto;
@@ -184,6 +298,7 @@ li:hover {
 #introduction article {
 	flex: 1
 }
+
 #introduction h2 {
 	margin-bottom: 1em;
 }
@@ -191,10 +306,14 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+/* PORTFOLIO */
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -205,58 +324,10 @@ li:hover {
 
 .gallery img {
 	width: 100%;
+	height: 500px;
 	padding-bottom: 10px;
+	object-fit: cover;
 
-}
-#contact, #login {
-	width: 50%;
-	margin: auto;
-}
-
-#contact > *, #login > * {
-	text-align: center;
-
-}
-#contact h2, #login h2 {
-	margin-bottom: 20px;
-}
-#contact form, #login form, .modal-wrapper-page-2 form {
-	text-align: left;
-	margin-top: 30px;
-	display: flex;
-	flex-direction: column;
-}
-
-#contact input, #login input, .modal-wrapper-page-2 input, .modal-wrapper-page-2 select {
-	height: 50px;
-	font-size: 1.2em;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-#contact label, #login label, .modal-wrapper-page-2 label {
-	margin: 2em 0 1em 0;
-}
-#contact textarea {
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-
-#contact input[type="submit"], #login input[type="submit"] {
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	margin : 2em auto ;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px;
-	cursor: pointer;
-}
-
-footer nav ul {
-	display: flex;
-	justify-content: flex-end;
-	margin: 2em
 }
 
 /* Ajout des boutons filtre du portfolio */
@@ -282,13 +353,83 @@ footer nav ul {
 	border-radius: 20px;
 }
 
-#portfolio li:hover {
-	color: white;
+#portfolio li:hover, .selected {
+	color: white !important;
 	background-color: #1D6154;
 	cursor: pointer;
 }
 
-/* Ajout de la page de login */
+/* CONTACT */
+
+#contact,
+#login {
+	width: 50%;
+	margin: auto;
+}
+
+#contact>*,
+#login>* {
+	text-align: center;
+
+}
+
+#contact h2,
+#login h2 {
+	margin-bottom: 20px;
+}
+
+#contact form,
+#login form,
+.modal-wrapper-page-2 form {
+	text-align: left;
+	margin-top: 30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#contact input,
+#login input,
+.modal-wrapper-page-2 input,
+.modal-wrapper-page-2 select {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#contact label,
+#login label,
+.modal-wrapper-page-2 label {
+	margin: 2em 0 1em 0;
+}
+
+#contact textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#contact input[type="submit"],
+#login input[type="submit"] {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin: 2em auto;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px;
+	cursor: pointer;
+}
+
+/* FOOTER */
+
+footer nav ul {
+	display: flex;
+	justify-content: flex-end;
+	margin: 2em
+}
+
+/* PAGE DE LOGIN */
 
 a {
 	text-decoration: none;
@@ -304,7 +445,7 @@ a {
 }
 
 #login input[type="submit"] {
-margin-top: 50px;
+	margin-top: 50px;
 }
 
 #forgotten {
@@ -315,11 +456,11 @@ margin-top: 50px;
 	font-weight: 700;
 }
 
+/* MODE ADMINISTRATEUR APRES LOGIN */
 
 /* Ajout de la modale */
 
 /* Global */
-
 
 #modal {
 	position: fixed;
@@ -333,7 +474,8 @@ margin-top: 50px;
 
 }
 
-.modal-wrapper-page-1, .modal-wrapper-page-2 {
+.modal-wrapper-page-1,
+.modal-wrapper-page-2 {
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -418,11 +560,11 @@ margin-top: 50px;
 }
 
 .modal-wrapper-page-1 input {
-	border:none;
-    background-image:none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
+	border: none;
+	background-image: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
 
 	font-family: 'Syne';
 	font-weight: 700;
@@ -443,7 +585,7 @@ margin-top: 50px;
 	cursor: pointer;
 }
 
-/* Modale page 2 */
+/* Modale page 2 - Formulaire */
 
 select {
 	background-color: #FFFFFF;
@@ -493,17 +635,17 @@ select {
 }
 
 .modal-wrapper-page-2-add-pic label {
-border: none;
-padding: 15px 40px;
-border-radius: 50px;
-white-space: nowrap;
+	border: none;
+	padding: 15px 40px;
+	border-radius: 50px;
+	white-space: nowrap;
 
-background-color: #CBD6DC;
-font-family: 'Work Sans';
-color: #306685;
+	background-color: #CBD6DC;
+	font-family: 'Work Sans';
+	color: #306685;
 
-cursor: pointer;
-margin: 0;
+	cursor: pointer;
+	margin: 0;
 }
 
 .modal-wrapper-page-2-add-pic p {
@@ -538,16 +680,15 @@ margin: 0;
 
 #img-preview {
 	display: flex;
-	align-items: center; 
+	align-items: center;
 	justify-content: center;
 	height: 205px;
 }
 
-#img-preview img { 
+#img-preview img {
 	height: 100%;
 	width: auto;
-	object-fit: contain; 
-	align-self: center; 
+	object-fit: contain;
+	align-self: center;
 	padding-bottom: 0;
-  }
-  
+}
