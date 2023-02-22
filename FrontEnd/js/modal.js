@@ -162,6 +162,51 @@ await fetch("http://localhost:5678/api/works")
     })
 
 
+
+
+/* SUPPRESSION DE TRAVAUX DEPUIS LA MODALE */
+
+function deleteWork() {
+
+    const pieceOfWorks = document.querySelectorAll("[data-piece-of-work]")
+    const bins = document.querySelectorAll("[data-bin]")
+
+    if (bins) {
+
+        bins.forEach(bin => {
+            bin.addEventListener('click', async e => {
+                e.preventDefault()
+                const binId = bin.getAttribute("data-bin-id")
+
+                for (const pieceOfWork of pieceOfWorks) {
+                    const pieceOfWorkId = pieceOfWork.getAttribute("data-piece-of-work-id")
+                    if (binId === pieceOfWorkId) {
+                        const response = await fetch(`http://localhost:5678/api/works/${pieceOfWorkId}`, {
+                            method: "DELETE",
+                            headers: new Headers({
+                                'Authorization': 'Basic ' + sessionStorage.getItem("token"),
+                            }),
+
+                        })
+                        console.log(response)
+                        if (response.status === 204) {
+                            alert('Work Deleted Successfully')
+                            pieceOfWork.remove()
+                            document.querySelector(`[data-figure-id="${pieceOfWorkId}"]`).remove()
+                        }
+
+                    }
+
+                }
+
+            })
+        })
+
+    }
+
+}
+
+
 /* AJOUT DE NOUVEAUX TRAVAUX VIA LE FORMULAIRE */
 
 /* Charger la miniature de l'image dans le formulaire */
@@ -203,6 +248,11 @@ addWork.addEventListener("submit", async e => {
     const workData = new FormData(addWork)
     console.log(workData)
 
+    if (workData.get('image').name === "") {
+        alert("Veuillez sélectionner une image")
+        return
+    }
+
     let response = await fetch("http://localhost:5678/api/works", {
         method: "POST",
         headers: new Headers({
@@ -225,47 +275,9 @@ addWork.addEventListener("submit", async e => {
     let work = new Work(result)
     document.querySelector(".gallery").append(createWork(work, false))
     document.querySelector(".modal-img").append(createWork(work, true))
+    deleteWork()
 
 })
-
-
-/* SUPPRESSION DE TRAVAUX DEPUIS LA MODALE */
-
-const pieceOfWorks = document.querySelectorAll("[data-piece-of-work]")
-const bins = document.querySelectorAll("[data-bin]")
-
-if (bins) {
-
-    bins.forEach(bin => {
-        bin.addEventListener('click', async e => {
-            e.preventDefault()
-            const binId = bin.getAttribute("data-bin-id")
-
-            for (const pieceOfWork of pieceOfWorks) {
-                const pieceOfWorkId = pieceOfWork.getAttribute("data-piece-of-work-id")
-                if (binId === pieceOfWorkId) {
-                    const response = await fetch(`http://localhost:5678/api/works/${pieceOfWorkId}`, {
-                        method: "DELETE",
-                        headers: new Headers({
-                            'Authorization': 'Basic ' + sessionStorage.getItem("token"),
-                        }),
-
-                    })
-                    console.log(response)
-                    if (response.status === 204) {
-                        alert('Work Deleted Successfully')
-                        pieceOfWork.remove()
-                        document.querySelector(`[data-figure-id="${pieceOfWorkId}"]`).remove()
-                    }
-
-                }
-
-            }
-
-        })
-    })
-
-}
 
 
 
