@@ -162,8 +162,6 @@ await fetch("http://localhost:5678/api/works")
     })
 
 
-
-
 /* SUPPRESSION DE TRAVAUX DEPUIS LA MODALE */
 
     const pieceOfWorks = document.querySelectorAll("[data-piece-of-work]")
@@ -263,6 +261,7 @@ addWork.addEventListener("submit", async e => {
         alert('Le formulaire a bien été envoyé !')
     } else {
         alert("Le formulaire n'est pas correctement rempli. Veuillez réessayer.")
+        return
     }
 
     resetForm()
