@@ -260,7 +260,6 @@ function isFormValidated() {
     })
   
     if (formValid) {
-        console.log("yo")
         validateBtn.classList.add('validated')
     } else {
         validateBtn.classList.remove('validated')
@@ -282,7 +281,6 @@ function isFormValidated() {
 
     input.addEventListener('input', e => {
     
-  
       const index = validators.findIndex(validator => validator.name === input.name)
       console.log(index)
   
@@ -291,9 +289,7 @@ function isFormValidated() {
       } else {
         validators[index].validated = true
       }
-
-      console.log(validators)
-  
+      
       isFormValidated()
     })
   })
