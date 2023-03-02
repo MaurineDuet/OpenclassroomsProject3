@@ -11,8 +11,6 @@ userLogin.addEventListener("submit", async e => {
     password: data.get("password")
   }
 
-  console.log(userInfos)
-
   const chargeUtile = JSON.stringify(userInfos)
 
   let response = await fetch("http://localhost:5678/api/users/login", {

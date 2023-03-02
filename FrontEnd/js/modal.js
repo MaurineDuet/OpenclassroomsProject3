@@ -212,7 +212,6 @@ function activateBins() {
     }
 }
 
-
 activateBins()
 
 

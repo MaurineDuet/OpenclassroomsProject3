@@ -24,10 +24,6 @@ await fetch("http://localhost:5678/api/works")
         for (let jsonWork of jsonListWorks) {
             let work = new Work(jsonWork)
             document.querySelector(".gallery").append(createWork(work, false))
-            /*`<figure data-figure data-figure-id="${work.id}" data-figure-cat="${work.category}">
-            <img src="${work.img}" alt="${work.id}">
-            <figcaption>${work.title}</figcaption>
-        </figure>`*/
         }
     })
 
